@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }: Props) {
             const user = await findUser(email.trim().toLowerCase(), password);
             if (user) {
                 Keyboard.dismiss();
-                navigation.navigate('Home', { email: user.email });
+                navigation.navigate('Main', { email: user.email });
             } else {
                 Alert.alert("Lỗi", "Sai email hoặc mật khẩu, hoặc tài khoản chưa tồn tại.");
             }

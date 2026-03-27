@@ -6,10 +6,10 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../type';
+import { MainTabParamList, RootStackParamList } from '../type';
 import { getProfile, getPosts, addPost, deletePost, Post, Profile } from '../storage';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<MainTabParamList, 'Home'>;
 
 const formatDate = (iso: string): string => {
     const d = new Date(iso);
@@ -83,11 +83,11 @@ export default function HomeScreen({ navigation, route }: Props) {
                     <Text style={styles.greeting}>Hello,</Text>
                     <Text style={styles.username}>{profile?.name || email} 👋</Text>
                 </View>
-                <View style={styles.headerActions}>
+                {/* <View style={styles.headerActions}>
                     <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.navigate('Profile', { email })}>
                         <Text style={styles.iconText}>👤</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
 
             {/* Posts count */}

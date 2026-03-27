@@ -5,10 +5,10 @@ import {
     TouchableWithoutFeedback, Keyboard
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../type';
+import { MainTabParamList, RootStackParamList } from '../type';
 import { getProfile, saveProfile, Profile } from '../storage';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
+type Props = NativeStackScreenProps<MainTabParamList, 'Profile'>;
 
 export default function ProfileScreen({ navigation, route }: Props) {
     const { email } = route.params;
@@ -82,9 +82,9 @@ export default function ProfileScreen({ navigation, route }: Props) {
                         <TouchableOpacity style={styles.btnSmall} onPress={handleSave}>
                             <Text style={styles.btnText}>Save</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.btnSmall} onPress={() => navigation.navigate('Login')}>
+                        {/* <TouchableOpacity style={styles.btnSmall} onPress={() => navigation.navigate('Login')}>
                             <Text style={styles.btnText}>Logout</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </ScrollView>
             </TouchableWithoutFeedback>
