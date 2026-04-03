@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import { Alert } from 'react-native';
 import SettingScreen from './screens/SettingScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import { RootStackParamList } from './type';
 import HomeScreen from './screens/HomeScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MainTabParamList } from './type';
-import { Ionicons } from '@expo/vector-icons';
-import { Route } from '@react-navigation/native';
+
+import { RootStackParamList, MainTabParamList } from './type';
+import { initDatabase } from './storage';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
-// Tạo component riêng cho bottom tab
 function MainTabs({ route }: any) {
   const userEmail = route.params?.email || '';
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -46,6 +48,20 @@ function MainTabs({ route }: any) {
 }
 
 export default function App() {
+  useEffect(() => {
+    const setupDB = async () => {
+      try {
+        await initDatabase();
+        console.log("Database SQLite đã sẵn sàng!");
+      } catch (error) {
+        console.error("Lỗi khởi tạo Database:", error);
+        Alert.alert("Lỗi", "Không thể khởi tạo hệ thống lưu trữ dữ liệu.");
+      }
+    };
+
+    setupDB();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Register" screenOptions={{ headerShown: false }}>
